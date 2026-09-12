@@ -1,7 +1,7 @@
 # Scalable-Precision MAC Unit
 
 A parameterized Multiply-Accumulate (MAC) unit in Verilog that supports **runtime-selectable
-operand precision** — INT4, INT8, INT16, and INT32 — through a single `prec_sel` control input,
+operand precision** — INT4, INT8, INT16, and INT32 — through a single `prec\\\\\\\_sel` control input,
 built and simulated in Xilinx Vivado.
 
 ## Why scalable precision?
@@ -14,47 +14,47 @@ accelerators where different layers/quantization levels need different precision
 ## Architecture
 
 ```
-         a[31:0], b[31:0], prec_sel[1:0]
+         a\\\\\\\[31:0], b\\\\\\\[31:0], prec\\\\\\\_sel\\\\\\\[1:0]
                      |
                      v
            +-------------------+
-           |   precision_ctrl  |   selects & sign-extends the active
-           |                   |   operand width based on prec_sel
+           |   precision\\\\\\\_ctrl  |   selects \\\\\\\& sign-extends the active
+           |                   |   operand width based on prec\\\\\\\_sel
            +-------------------+
                      |
-              a_eff, b_eff (sign-extended to MAX_W)
-                     |
-                     v
-           +-------------------+
-           |     mac_core       |  2-stage pipeline:
-           |                     |   stage 1: a_eff * b_eff
-           |                     |   stage 2: accumulate (if acc_en)
-           +-------------------+
+              a\\\\\\\_eff, b\\\\\\\_eff (sign-extended to MAX\\\\\\\_W)
                      |
                      v
-              y[2*MAX_W:0]  (signed accumulator output)
+           +-------------------+
+           |     mac\\\\\\\_core       |  2-stage pipeline:
+           |                     |   stage 1: a\\\\\\\_eff \\\\\\\* b\\\\\\\_eff
+           |                     |   stage 2: accumulate (if acc\\\\\\\_en)
+           +-------------------+
+                     |
+                     v
+              y\\\\\\\[2\\\\\\\*MAX\\\\\\\_W:0]  (signed accumulator output)
 ```
 
-`prec_sel` encoding:
+`prec\\\\\\\_sel` encoding:
 
-| `prec_sel` | Precision |
-|---|---|
-| `2'b00` | INT4  (4x4 -> sign-extended) |
-| `2'b01` | INT8  (8x8 -> sign-extended) |
-| `2'b10` | INT16 (16x16 -> sign-extended) |
-| `2'b11` | INT32 (full width) |
+|`prec\\\\\\\_sel`|Precision|
+|-|-|
+|`2'b00`|INT4  (4x4 -> sign-extended)|
+|`2'b01`|INT8  (8x8 -> sign-extended)|
+|`2'b10`|INT16 (16x16 -> sign-extended)|
+|`2'b11`|INT32 (full width)|
 
 ## Repo layout
 
 ```
 .
 ├── rtl/
-│   ├── mac_top.v          # top-level: wires precision_ctrl + mac_core
-│   ├── mac_core.v         # pipelined signed multiply-accumulate
-│   └── precision_ctrl.v   # precision select / sign-extension mux
+│   ├── mac\\\\\\\_top.v          # top-level: wires precision\\\\\\\_ctrl + mac\\\\\\\_core
+│   ├── mac\\\\\\\_core.v         # pipelined signed multiply-accumulate
+│   └── precision\\\\\\\_ctrl.v   # precision select / sign-extension mux
 ├── tb/
-│   ├── mac_top_tb.v        # top-level testbench
-│   └── mac_core_tb.v       # mac_core-only testbench
+│   ├── mac\\\\\\\_top\\\\\\\_tb.v        # top-level testbench
+│   └── mac\\\\\\\_core\\\\\\\_tb.v       # mac\\\\\\\_core-only testbench
 └── README.md
 ```
 
@@ -63,17 +63,17 @@ accelerators where different layers/quantization levels need different precision
 Behavioral simulation was run in Vivado 2025.2 across fixed-precision and mixed-precision
 (including signed) test vectors, covering:
 
-- Fixed-precision MAC accumulation
-- Full scalable-precision sweep (INT4 -> INT32)
-- Signed-operand handling verification
+* Fixed-precision MAC accumulation
+* Full scalable-precision sweep (INT4 -> INT32)
+* Signed-operand handling verification
 
 ## Tools used
 
-- Xilinx Vivado 2025.2 (behavioral simulation, synthesis)
+* Xilinx Vivado 2025.2 (behavioral simulation, synthesis)
 
 ## Status
 
-- [x] `precision_ctrl`: precision select + sign extension — implemented, simulated
-- [x] `mac_core`: 2-stage pipelined MAC — implemented, simulated
-- [x] `mac_top`: integration — implemented, simulated
-- [ ] Synthesis / implementation results (add if you run these)
+* \[x] `precision\\\\\\\_ctrl`: precision select + sign extension — implemented, simulated
+* \[x] `mac\\\\\\\_core`: 2-stage pipelined MAC — implemented, simulated
+* \[x] `mac\\\\\\\_top`: integration — implemented, simulated
+

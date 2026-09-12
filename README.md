@@ -55,15 +55,13 @@ accelerators where different layers/quantization levels need different precision
 ├── tb/
 │   ├── mac_top_tb.v        # top-level testbench
 │   └── mac_core_tb.v       # mac_core-only testbench
-├── sim/
-│   └── screenshots/        # Vivado behavioral simulation waveforms
 └── README.md
 ```
 
 ## Simulation results
 
 Behavioral simulation was run in Vivado 2025.2 across fixed-precision and mixed-precision
-(including signed) test vectors. Waveform captures are in `sim/screenshots/`:
+(including signed) test vectors, covering:
 
 - Fixed-precision MAC accumulation
 - Full scalable-precision sweep (INT4 -> INT32)
@@ -79,8 +77,3 @@ Behavioral simulation was run in Vivado 2025.2 across fixed-precision and mixed-
 - [x] `mac_core`: 2-stage pipelined MAC — implemented, simulated
 - [x] `mac_top`: integration — implemented, simulated
 - [ ] Synthesis / implementation results (add if you run these)
-
-## License
-
-Add a license here (MIT is a common default for personal HDL projects) if you want others to be
-able to reuse this.

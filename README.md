@@ -76,4 +76,3 @@ Behavioral simulation was run in Vivado 2025.2 across fixed-precision and mixed-
 - [x] `precision_ctrl`: precision select + sign extension — implemented, simulated
 - [x] `mac_core`: 2-stage pipelined MAC — implemented, simulated
 - [x] `mac_top`: integration — implemented, simulated
-- [ ] Synthesis / implementation results (add if you run these)
